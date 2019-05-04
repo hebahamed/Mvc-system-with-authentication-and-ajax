@@ -1,0 +1,28 @@
+﻿@model int
+@{
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+@{
+    ViewBag.Title = "_ButtonsPartial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.ActionLink("Details", "Details", new { id = @Model }, new { @class = "btn btn-warning" })
+
+@if (User.IsInRole("Admin"))
+{
+
+    <button class="btn btn-danger" onclick="confirmDelete(@Model)">Delete</button>
+    @Html.ActionLink("Edit", "Edit", new { id = @Model }, new { @class = "btn btn-primary" })
+    
+}
+@if (User.IsInRole("Manager") && controllerName == "Employees")
+{
+    <button class="btn btn-danger" onclick="confirmDelete(@Model)">Delete</button>
+    @Html.ActionLink("Edit", "Edit", new { id = @Model }, new { @class = "btn btn-primary" })
+  
+
+}
+
+
+

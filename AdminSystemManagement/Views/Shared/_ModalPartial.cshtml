@@ -1,0 +1,91 @@
+﻿@model EmployeeViewModel
+@{
+    ViewBag.Title = "_ModalPartial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var options = new AjaxOptions
+    {
+        
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.InsertAfter,
+        UpdateTargetId = "tbody",
+        OnSuccess = "addSuccess"
+    };
+}
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Ajax.BeginForm("Add", "Employee", options))
+                {
+                    @*if (ViewBag.Action == "Edit")
+                        {
+                            <div class="form-group">
+                                @Html.HiddenFor(m => m.employee.Id);
+                            </div>
+                        }*@
+
+                    <div class="form-group">
+                        <label>Name :</label>
+                        @Html.TextBoxFor(m => m.employee.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.employee.Name)
+                    </div>
+                    <div class="form-group">
+                        <label>Age :</label>
+                        @Html.TextBoxFor(m => m.employee.Age, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.employee.Age)
+
+                    </div>
+                    <div class="form-group">
+                        <label>Gender :</label>
+                        @Html.EnumDropDownListFor(m => m.employee.Gender, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.employee.Gender)
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email :</label>
+                        @Html.TextBoxFor(m => m.employee.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.employee.Email)
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Department :</label>
+                        @Html.DropDownListFor(m => m.employee.Fk_DepartmentId, new SelectList(Model.departments, "Id", "Name"), "Select Department", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.employee.Fk_DepartmentId)
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Add" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+
+        function addSuccess() {
+
+
+            $('#mymodel').modal('hide');
+            document.getElementById('form0').reset();
+        }
+    </script>

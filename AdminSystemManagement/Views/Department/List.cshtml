@@ -1,0 +1,40 @@
+﻿@Model List<Department>
+    @{
+        ViewBag.Title = "List";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>List Departments</h2>
+
+
+
+    <a href="Add" class="btn btn-primary">ADD Department</a>
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+
+
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            @foreach (Department dept in Model)
+            {
+                <tr>
+                    <td>@dept.Id</td>
+                    <td>@dept.Name</td>
+
+                    <td>
+                        @Html.Partial("_ButtonsPartial", dept.Id)
+
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+    <script src="~/Scripts/MyScripts/confirmDeleteDept.js"></script>

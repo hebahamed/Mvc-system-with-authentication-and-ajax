@@ -1,0 +1,61 @@
+﻿@model EmployeeViewModel
+   
+    @{
+        ViewBag.Title = "List";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+
+    <h2>List Employees</h2>
+
+    @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+    {
+    <a href="Add" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Add Employee
+    </a>
+    }
+
+    @if (Model.Employees == null || Model.Employees.Count == 0)
+    {
+        <h2>No Found Employee</h2>
+    }
+
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Department Name</th>
+
+
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            @foreach (Employee emp in Model.Employees)
+    {
+        <tr>
+            <td>@emp.Id</td>
+            <td>@emp.Name</td>
+            <td>@emp.Age</td>
+            <td>@emp.Gender</td>
+            <td>@emp.Email</td>
+            <td>@emp.Department.Name</td>
+            <td>
+
+                @Html.Partial("_ButtonsPartial", emp.Id)
+
+            </td>
+
+        </tr>
+      
+}
+        </tbody>
+    </table>
+
+
+
+    <script src="~/Scripts/MyScripts/confirmDeleteEmp.js"></script>
+@Html.Partial("_ModalPartial", Model);

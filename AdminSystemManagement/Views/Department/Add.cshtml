@@ -1,0 +1,39 @@
+﻿@model Department
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var options = new AjaxOptions
+    {
+        Confirm = "Are you Sure ?",
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.InsertAfter,
+        UpdateTargetId = "tbody",
+        OnSuccess = "addSuccess"
+    };
+}
+
+<h2>Add</h2>
+@using (Ajax.BeginForm("Add", "Department", options))
+{
+    <div class="form-group">
+        <label>Name :</label>
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+
+    <br />
+    <br />
+    <input type="submit" class="btn btn-primary">
+    <a href="List" class="btn btn-success"> Back To List</a>
+
+}
+
+    <script>
+
+    function addSuccess() {
+
+        location.href = `List`;
+    }
+    </script>

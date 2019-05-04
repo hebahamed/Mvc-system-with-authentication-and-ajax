@@ -1,0 +1,18 @@
+﻿@model Employee
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div class="card bg-light mb-3" style="max-width: 18rem;">
+    <div class="card-header">Name :@Model.Name </div>
+    <div class="card-body">
+        <h5 class="card-title">Age :@Model.Age</h5>
+        <h5 class="card-title">Age :@Model.Gender</h5>
+        <h5 class="card-title">Age :@Model.Email</h5>
+
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+</div>

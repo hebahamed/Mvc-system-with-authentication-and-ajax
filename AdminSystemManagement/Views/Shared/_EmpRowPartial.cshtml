@@ -1,0 +1,20 @@
+﻿@model Employee
+@{
+    ViewBag.Title = "_EmpRowPartial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>_EmpRowPartial</h2>
+
+<tr id="@Model.Id">
+    <td>@Model.Id</td>
+    <td>@Model.Name</td>
+    <td>@Model.Age</td>
+    <td>@Model.Gender</td>
+    <td>@Model.Email</td>
+    <td>@Model.Department.Name</td>
+    <td>
+
+        @Html.Partial("_ButtonsPartial",Model.Id)
+
+    </td>
